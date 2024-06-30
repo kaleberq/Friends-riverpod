@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:friends/models/FriendModel.dart';
 
-import 'friends_list_view_model.dart';
+import '../friends_view_model.dart';
 
 class FriendsList extends ConsumerStatefulWidget {
   const FriendsList({super.key});
