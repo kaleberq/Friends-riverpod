@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:friends/models/FriendModel.dart';
-
-import '../friends_view_model.dart';
+import 'package:friends/screens/friends_view_model.dart';
 
 class FriendsList extends ConsumerStatefulWidget {
   const FriendsList({super.key});
@@ -18,32 +17,33 @@ class _FriendsListState extends ConsumerState<FriendsList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Consumer(builder: (BuildContext build, WidgetRef refList, _) {
-            // AsyncValue<List<FriendModel>> friends = refList.watch(friendsListViewModelProvider).friends;
-            //
-            // return friends.when(
-            //     data: (data){
-            //      return Text(data.first.name);
-            //     },
-            //     error: (Object, StackTrace){
-            //       return SizedBox.shrink();
-            //     },
-            //     loading: (){
-            //       return SizedBox.shrink();
-            //     });
-            return Text('ss');
-          }),
-          TextButton(
-            onPressed: () {
-              friendsListViewModel.setNewFriend(
-                  friend:
-                      FriendModel(name: 'Rafael', age: 28, hobby: 'futebol'));
-            },
-            child: const Text('add friend'),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Consumer(builder: (BuildContext build, WidgetRef refData, _) {
+                final AsyncValue<List<FriendModel>> friends =
+                    ref.watch(friendsListViewModelProvider).friends;
+
+                return friends.when(data: (data) {
+                  return Text(data.first.name);
+                }, error: (Object, StackTrace) {
+                  return SizedBox.shrink();
+                }, loading: () {
+                  return SizedBox.shrink();
+                });
+              }),
+              TextButton(
+                onPressed: () {
+                  friendsListViewModel.setNewFriend(
+                      friend: FriendModel(
+                          name: 'Rafael', age: 28, hobby: 'futebol'));
+                },
+                child: const Text('add friend'),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

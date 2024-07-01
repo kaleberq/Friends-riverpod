@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:friends/route/routes.dart';
 
 void main() {
-  runApp(
-      MaterialApp.router(
-        routerConfig: router,
-      )
-  );
+  runApp(ProviderScope(
+      child: MaterialApp.router(
+    routerConfig: router,
+  )));
 }
