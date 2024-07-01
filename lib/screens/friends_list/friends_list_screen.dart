@@ -12,39 +12,34 @@ class FriendsList extends ConsumerStatefulWidget {
 }
 
 class _FriendsListState extends ConsumerState<FriendsList> {
-
-  late final friendsListViewModel = ref.read(friendsListViewModelProvider.notifier);
+  late final friendsListViewModel =
+      ref.read(friendsListViewModelProvider.notifier);
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: Column(
         children: [
-          Consumer(builder: (BuildContext build, WidgetRef refList, _ ){
-
-            AsyncValue<List<FriendModel>> friends = refList.watch(friendsListViewModelProvider).friends;
-
-            return friends.when(
-                data: (data){
-                 return Text(data.first.name);
-                },
-                error: (Object, StackTrace){
-                  return SizedBox.shrink();
-                },
-                loading: (){
-                  return SizedBox.shrink();
-                });
-
-
+          Consumer(builder: (BuildContext build, WidgetRef refList, _) {
+            // AsyncValue<List<FriendModel>> friends = refList.watch(friendsListViewModelProvider).friends;
+            //
+            // return friends.when(
+            //     data: (data){
+            //      return Text(data.first.name);
+            //     },
+            //     error: (Object, StackTrace){
+            //       return SizedBox.shrink();
+            //     },
+            //     loading: (){
+            //       return SizedBox.shrink();
+            //     });
+            return Text('ss');
           }),
           TextButton(
-            onPressed: (){
+            onPressed: () {
               friendsListViewModel.setNewFriend(
-                  friend: FriendModel(
-                      name: 'Rafael', age: 28, hobby: 'futebol'
-                  )
-              );
+                  friend:
+                      FriendModel(name: 'Rafael', age: 28, hobby: 'futebol'));
             },
             child: const Text('add friend'),
           ),

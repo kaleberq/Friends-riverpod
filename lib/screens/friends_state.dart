@@ -4,9 +4,7 @@ import 'package:friends/models/FriendModel.dart';
 class FriendsState {
   final AsyncValue<List<FriendModel>> friends;
 
-  FriendsState({
-    required this.friends
-  });
+  const FriendsState({this.friends = const AsyncValue.loading()});
 
   FriendsState copyWith({
     AsyncValue<List<FriendModel>>? friends,
@@ -16,4 +14,3 @@ class FriendsState {
     );
   }
 }
-
