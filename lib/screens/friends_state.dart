@@ -4,7 +4,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 class FriendsState {
   final AsyncValue<List<FriendModel>> friends;
 
-  const FriendsState({this.friends = const AsyncValue.loading()});
+  const FriendsState(
+      {
+        this.friends = const AsyncValue.data([])
+      });
 
   FriendsState copyWith({
     AsyncValue<List<FriendModel>>? friends,
