@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:friends/models/FriendModel.dart';
+import 'package:friends/models/friend_model.dart';
 import 'package:friends/screens/friends_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -13,14 +13,23 @@ final friendsListViewModelProvider =
 class FriendsListViewModel extends StateNotifier<FriendsState> {
   FriendsListViewModel() : super(const FriendsState());
 
-  setNewFriend({required FriendModel friend}) {
-    List<FriendModel> friends = [];
+  setNewFriend({required FriendModel friend}) async {
     if (state.friends.hasValue) {
-      friends = state.friends.value!;
-      friends.add(friend);
+       final List<FriendModel> friends = state.friends.value!;
+       state = state.copyWith(friends: AsyncLoading());
+       await Future.delayed(Duration(seconds: 1));
+       friends.add(friend);
+      state = state.copyWith(friends: AsyncValue.data(friends));
     } else {
-      friends.add(friend);
+      state = state.copyWith(friends: AsyncValue.data([friend]));
     }
+  }
+  excludeFriend({required FriendModel friend})async {
+    final List<FriendModel> friends = state.friends.value!;
+    state = state.copyWith(friends: AsyncLoading());
+    await Future.delayed(Duration(seconds: 1));
+
+    friends.removeWhere((data) => data == friend);
     state = state.copyWith(friends: AsyncValue.data(friends));
   }
 }
