@@ -1,4 +1,4 @@
-import 'package:friends/models/friend_model.dart';
+import 'package:friends/domain/models/friend_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 class FriendsState {

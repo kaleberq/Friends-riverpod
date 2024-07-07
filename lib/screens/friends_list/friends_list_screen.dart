@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:friends/models/friend_model.dart';
+import 'package:friends/domain/models/friend_model.dart';
 import 'package:friends/screens/friends_view_model.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -62,7 +62,7 @@ class _FriendsListState extends ConsumerState<FriendsList> {
                                       TextButton(
                                         child: const Text('Excluir'),
                                         onPressed: () {
-                                          friendsListViewModel.excludeFriend(friend: friend);
+                                          friendsListViewModel.excludeValue(value: friend);
                                         },
                                       ),
                                       const SizedBox(width: 8),
@@ -184,8 +184,8 @@ class _FriendsListState extends ConsumerState<FriendsList> {
                             _controllerAge.value.text.trim() != '' &&
                             _controllerHobby.value.text.trim() != ''
                         ){
-                          friendsListViewModel.setNewFriend(
-                              friend: FriendModel(
+                          friendsListViewModel.setValue(
+                              value: FriendModel(
                                   name: _controllerName.value.text,
                                   age: int.parse(_controllerAge.value.text),
                                   hobby: _controllerHobby.value.text.trim()
