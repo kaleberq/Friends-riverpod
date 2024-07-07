@@ -15,16 +15,17 @@ class FriendsListViewModel extends StateNotifier<FriendsState> {
 
   setNewFriend({required FriendModel friend}) async {
     if (state.friends.value!.isNotEmpty) {
-       final List<FriendModel> friends = state.friends.value!;
-       state = state.copyWith(friends: AsyncLoading());
-       await Future.delayed(Duration(seconds: 1));
-       friends.add(friend);
+      final List<FriendModel> friends = state.friends.value!;
+      state = state.copyWith(friends: AsyncLoading());
+      await Future.delayed(Duration(seconds: 1));
+      friends.add(friend);
       state = state.copyWith(friends: AsyncValue.data(friends));
     } else {
       state = state.copyWith(friends: AsyncValue.data([friend]));
     }
   }
-  excludeFriend({required FriendModel friend})async {
+
+  excludeFriend({required FriendModel friend}) async {
     final List<FriendModel> friends = state.friends.value!;
     state = state.copyWith(friends: AsyncLoading());
     await Future.delayed(Duration(seconds: 1));
