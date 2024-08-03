@@ -29,6 +29,7 @@ dependencies:
   go_router: ^14.2.0
   riverpod_annotation: ^3.0.0-dev.3
   shimmer: ^2.0.0
+  tutorial_coach_mark: ^1.2.11
 
 dev_dependencies:
   build_runner:
